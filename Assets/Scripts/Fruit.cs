@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Fruit : MonoBehaviour
 {
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.collider.tag == "Player")
+        if (other.collider.tag == "Bullet")
         {
-            Debug.Log("Coin Collected! +10");
-            ScoreManager.instance.ChangeScore(10);
+            Debug.Log("Fruit Shot Down! + 100 ");
+            ScoreManager.instance.ChangeScore(100);
             Destroy(gameObject);
         }
     }

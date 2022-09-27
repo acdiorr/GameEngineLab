@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
 
     public PlayerAction inputAction;
     Vector2 move;
-    Vector2 rotate;
+    Vector3 rotate;
     private float walkSpeed = 5f;
+    private float rotateSpeed = 30f;
     public float jump = 5f;
 
 
@@ -60,7 +61,9 @@ public class PlayerController : MonoBehaviour
         inputAction.Player.Jump.performed += cntxt => Jump();
         inputAction.Player.Shoot.performed += cntxt => Shoot();
 
-   
+        inputAction.Player.Look.performed += cntxt => rotate = cntxt.ReadValue<Vector2>();
+        inputAction.Player.Look.canceled += cntxt => rotate = Vector2.zero;
+
         distanceToGround = GetComponent<Collider>().bounds.extents.y;
 
     }
@@ -88,6 +91,9 @@ public class PlayerController : MonoBehaviour
     {
         transform.Translate(Vector3.forward * move.y * Time.deltaTime * walkSpeed, Space.Self);
         transform.Translate(Vector3.right * move.x * Time.deltaTime * walkSpeed, Space.Self);
+
+        transform.Rotate( new Vector3(0, 1, 0), rotate.x * Time.deltaTime * rotateSpeed);
+       
 
         isGrounded = Physics.Raycast(transform.position, -Vector3.up, distanceToGround);
     }

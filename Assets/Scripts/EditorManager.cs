@@ -36,7 +36,6 @@ public class EditorManager : MonoBehaviour
     {
         mainCam.enabled = !mainCam.enabled;
         editorCam.enabled = !editorCam.enabled;
-        //your balls look heavy, need a hand?
 
 
     }
